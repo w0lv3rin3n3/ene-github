@@ -1,0 +1,11 @@
+LG Remote
+
+16:33:11.004 -> 20DF10EF - Power On/Off
+16:33:13.983 -> 20DF02FD - Arrow Up
+16:33:16.006 -> 20DF827D - Arrow Down
+16:33:16.999 -> 20DFE01F - Arrow Left
+16:33:17.989 -> 20DF609F - Arrow Right
+16:33:21.009 -> 20DF40BF - Volume Up
+16:33:21.999 -> 20DFC03F - Volume Down
+16:33:22.986 -> 20DF00FF - Program Up
+16:33:26.004 -> 20DF807F - Program Down

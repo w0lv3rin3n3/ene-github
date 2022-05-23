@@ -1,0 +1,26 @@
+Coduri telecomanda OSRAM Led
+
+MODE 		- FFD827
+Custom_Color_12 - FF58A7
+Custom_Color_11 - FF9867
+Custom_Color_10 - FF18E7
+SMOOTH		- FFE817
+Custom_Color_9  - FF6897
+Custom_Color_8 	- FFA857
+Custom_Color_7 	- FF28D7
+STROBE 	       	- FFC837
+Custom_Color_6 	- FF48B7
+Custom_Color_5 	- FF8877
+Custom_Color_4 	- FF08F7
+FLASH	       	- FFF00F
+Custom_Color_3 	- FF708F
+Custom_Color_2 	- FFB04F
+Custom_Color_1 	- FF30CF
+WHITE	       	- FFC03F
+BLUE		- FF50AF
+GREEN 		- FF906F
+RED 		- FF10EF
+ON		- FFE01F
+OFF 		- FF609F
+LIGHT DOWN 	- FF40BF
+LIGHT UP	- FF00FF

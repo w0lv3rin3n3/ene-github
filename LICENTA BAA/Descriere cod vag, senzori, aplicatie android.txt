@@ -1,0 +1,39 @@
+turn off interrupts
+connect to server
+mcu init
+turn on interrupts
+while(mcu_enable == 1)
+{
+	wfi(); //wait for interrupt -> idle state
+	room1_light_button = 1 //interrupt
+		light_interrupt_handler => 	switch pad1 from 0 to 1	//turn on light in room1
+	wfi(); //wait for interrupt -> idle state
+	...
+	room1_temp_sensor > 23 //interrupt
+	temp_interrupt_handler => 	switch pad4 from 0 to 1
+						while(room1_temp_sensor > 22)
+						{
+						} //wait for room to cool down
+						switch pad4 from 1 to 0
+	wfi(); //wait for interrupt -> idle state
+	room3_move_sensor == 1 //interrupt
+		alarm_interrupt_handler => 	switch pad5 from 0 to 1 //alarm state
+}
+
+Senzori folositi:
+- pentru controlul temperaturii -> senzor de temperatura si de umiditate -> putem afisa realfeel temperature si temperature, nivelul de umiditate
+- pentru controlul luminii -> 	fie folosim doar un buton, fie folosim un senzor de miscare si becul se aprinde cand detecteaza miscare, 
+				la o anumita intensitate luminoasa din camera care provine de la lumina naturala
+			   ->	folosim de asemenea si un releu care dă drumul la curent sau nu, cum vrem noiZ, programabil din plăcuță
+- pentru alarma -> 	folosim tot senzori de miscare. acestia se activeaza cand alarma este activata. Daca se detecteaza o anumita miscare in
+			camera unde avem senzorul si alarma activata, se declanseaza o alerta sonora.
+
+
+Aplicatie Android:
+Aplicatia va incepe cu planul casei. Camerele sunt separate in mai multe dreptunghiuri/forme geometrice, iar apasand pe fiecare camera in 
+parte vom deschide meniul camerei respective. Acolo vom avea mai multe optiuni intr-un meniu si vom putea selecta intre controlul luminii,
+controlul temperaturii, etc. Apoi, se deschide un alt meniu in care vom avea diverse casete text cu informatii in timp real si diferite butoane
+referitoare la controlul parametrului respectiv. De exemplu, in controlul temperaturii, vom avea afisate informatiile despre umiditate si temperatura
+in casete text, iar sub acestea vom avea butoane. fie sa pornim sau sa oprim AC, fie sa schimbam temperatura in incapere, fie sa dam drumul la dezumidificare, etc.
+Vom crea o interfata simpla, si un meniu in cascada. Vom avea mereu proiectat pe ecran si un buton de home, care sa ne intoarca la planul casei.
+

@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    display: grid;
+    grid-template-rows: 3.5rem auto fit-content(8rem);
+    /* padding: 3.5rem; */
+    height: 100%;
+    grid-template-areas: "header" "main" "footer";
+  }
+  
+  .main-header {
+    grid-area: header;
+    background: rgb(248, 248, 248);
+  }
+  
+  img {
+    height: 3.5rem;
+  }

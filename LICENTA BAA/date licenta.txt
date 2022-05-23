@@ -1,0 +1,24 @@
+Pot folosi tot ce am desenat in schema?
+Mai trebuie adaugat ceva la schema?
+Daca nu imi ajung porturile pentru toti senzorii, cum pot face? Folosesc multiplexor?
+Se pot imprumuta chestii de la facultate/bani pentru componente?
+In loc de senzor de umiditate in pamant, folosesc un senzor de ploaie si inchid ferestrele daca ploua de 3 minute?
+Cum pot face cu alarmele false la senzori? (senzor de miscare, senzorul de ploaie)
+
+Senzorii trebuie sa comunice wireless cu microcontroller-ul sau cu server-ul si cu telefonul?
+Trebuie sa am mai multe placute in fiecare camera, si toate sa comunice wireless cu o placuta generala care da toate comenzile?
+Daca da, cum pot cumpara mai multe placute? (bani?!?!)
+Se poate rezuma proiectul doar la nivel de experiment sau trebuie dus in zona de 230V?
+Daca trebuie dus la nivel de 230V cum pot simula A/C si TV? Doar pun niste senzori IR si aprind niste leduri cand trimit comenzile hardcodate?
+
+
+R=100ohm x multe
+C=0.1uF
+3 senzori 36, 38, 40
+led ir - 2 seturi
+fotorezistor - si un rezistor de 10kohm divizor de tensiune, citesc de la mijloc
+
+
+
+stm + 2xesp32
+multi esp32 in fiecare camera

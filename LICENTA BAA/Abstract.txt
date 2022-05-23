@@ -1,0 +1,9 @@
+Automatizarea casei si intreaga idee despre case inteligente devine din ce in ce mai importanta si mai cautata in secolul 21. Obiectul principal al acestui proiect
+este acela de a dezvolta si a crea un sistem inteligent prin care putem acumula informatii de la diferiti senzori din casa pe telefon si de a controla functionalitati
+ale casei noastre direct de pe smartphone-ul nostru. Tehnologiile folosite in acest proiect sunt protocolul de comunicatie wireless - Wi-Fi; ESP-NOW care este un 
+protocol de transmisie wireless creat de Espressif intre mai multe placi de dezvoltare ESP32; diferite protocoale de transmisie seriala - uart, i2c, spi; 
+baze de date pentru acumularea datelor si protectia acestora; o parte de front-end in care vom avea interfata utilizatorului. Aplicatia propusa permite controlul 
+facil al utilitatilor din casa: stingerea/aprinderea becurilor, pornirea/oprirea A/C, pornirea/oprirea TV. De asemenea nu se folosesc telecomandele aferente fiecarui
+device, ci sistemul este capabil sa invete si sa reproduca semnalele IR de la telecomanda fizica, si sa foloseasca in schimb butoane de pe aplicatia web, pe telefon.
+Toate acestea fiind implementate in reteaua proprie, folosindu-ne de ssid-ul router-ului Wi-Fi si de parola retelei pentru a crea un sistem inteligent, fara fire si 
+retele fizice complexe. 
