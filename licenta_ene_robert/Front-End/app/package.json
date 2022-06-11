@@ -4,9 +4,11 @@
     "description": "Communication between Arduino and HTML/JavaScript",
     "type": "commonjs",
     "dependencies": {
+        "chart.js": "^3.8.0",
         "cors": "^2.8.5",
         "express": "^4.18.1",
         "johnny-five": "^2.1.0",
+        "moment": "^2.29.3",
         "mysql": "^2.18.1",
         "serialport": "^9.2.8",
         "socket.io": "^2.4.1"

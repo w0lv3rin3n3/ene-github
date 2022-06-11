@@ -3,6 +3,8 @@
   <head>
     <title>Temp Sensor</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- <script src="js/moment-with-locales.js"></script> -->
     <link rel="stylesheet" href="src/app.css" />
   </head>
 
@@ -10,18 +12,46 @@
     <div id="feed"></div>
     <div id="ledState"></div>
     <h4>Control LED</h4>
-    <button onClick="sendValue(1)">Turn on</button>
-    <button onClick="sendValue(0)">Turn off</button>
+    <button onClick="setLedState(1)">Turn on</button>
+    <button onClick="setLedState(0)">Turn off</button>
+    <br /><br />
+    <button onClick="sendIRData(0x20DF10EF)">ON/OFF</button>
+    <button onClick="sendIRData(0x20DF02FD)">UP</button>
+    <button onClick="sendIRData(0x20DF827D)">DOWN</button>
+    <button onClick="sendIRData(0x20DFE01F)">LEFT</button>
+    <button onClick="sendIRData(0x20DF609F)">RIGHT</button>
+    <button onClick="sendIRData(0x20DF40BF)">VOL UP</button>
+    <button onClick="sendIRData(0x20DFC03F)">VOL DOWN</button>
+    <button onClick="sendIRData(0x20DF00FF)">PROGRAM UP</button>
+    <button onClick="sendIRData(0x20DF807F)">PROGRAM DOWN</button>
+    <br /><br />
+    <div class="charts">
+      <div class="chart-container-temp">
+        <canvas id="myChartTemp"></canvas>
+      </div>
+      <div class="chart-container-gas">
+        <canvas id="myChartGas"></canvas>
+      </div>
+    </div>
     <script type="text/javascript">
-      function sendValue(state) {
-          fetch(`http://localhost:3000/slider-input/send/${state}`)
-            .then((response) => response.json())
-            .then((data) => {
-              feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
-            })
-            .catch((err) => console.log(err));
+      function setLedState(state) {
+        fetch(`http://localhost:3000/slider-input/send/${state}`)
+          .then((response) => response.json())
+          .then((data) => {
+            feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+          })
+          .catch((err) => console.log(err));
+      }
+      function sendIRData(command) {
+        fetch(`http://localhost:3000//commandIR/send/${command}`)
+          .then((response) => response.json())
+          .then((data) => {
+            feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+          })
+          .catch((err) => console.log(err));
       }
     </script>
-    <script src="src/feed.js"></script>
+    <script src="src/feedTemp.js"></script>
+    <script src="src/feedGas.js"></script>
   </body>
 </html>
