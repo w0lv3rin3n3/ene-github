@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temp Sensor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <link rel="stylesheet" href="src/app.css" />
+  </head>
+
+  <body>
+    <div id="feed"></div>
+    <div id="ledState"></div>
+    <h4>Control LED</h4>
+    <button onClick="sendValue(1)">Turn on</button>
+    <button onClick="sendValue(0)">Turn off</button>
+    <script type="text/javascript">
+      function sendValue(state) {
+          fetch(`http://localhost:3000/slider-input/send/${state}`)
+            .then((response) => response.json())
+            .then((data) => {
+              feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+            })
+            .catch((err) => console.log(err));
+      }
+    </script>
+    <script src="src/feed.js"></script>
+  </body>
+</html>
