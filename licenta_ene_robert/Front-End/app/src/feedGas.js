@@ -61,6 +61,6 @@ fetch("http://localhost:3000/gas-sensor")
 
 
 
-  setTimeout(function(){
-    window.location.reload(1);
- }, 20000);
+//   setTimeout(function(){
+//     window.location.reload(1);
+//  }, 20000);

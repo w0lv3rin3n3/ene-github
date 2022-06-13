@@ -7,6 +7,10 @@ const { json } = require("express");
 const moment = require("moment");
 app.use(cors());
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+
 const parsers = SerialPort.parsers;
 
 const parser = new parsers.Readline({
@@ -14,14 +18,14 @@ const parser = new parsers.Readline({
 });
 
 // Create port
-// var port = new SerialPort("COM10", {
-//   baudRate: 115200,
-//   dataBits: 8,
-//   parity: "none",
-//   stopBits: 1,
-//   flowControl: false,
-// });
-// port.pipe(parser);
+var port = new SerialPort("COM5", {
+  baudRate: 115200,
+  dataBits: 8,
+  parity: "none",
+  stopBits: 1,
+  flowControl: false,
+});
+port.pipe(parser);
 
 
 // Create data buffer
@@ -53,7 +57,14 @@ parser.on("data", function (data) {
   console.log("Received data from port: " + data);
   app.emit("data", data); //this should send the object to index.html
   dataFromSensor = obj;
-  addDataToDb(dataFromSensor)
+  if(dataFromSensor.sensor_name == "ir")
+  {
+    addIRSensors(dataFromSensor)
+    console.log("Inserted sensor " + dataFromSensor.sensor_name);
+  }
+    
+  else
+    addSensorsToDb(dataFromSensor)
 });
 
 // Create connection
@@ -109,16 +120,34 @@ app.get('/create-sensors-table', (req, res) => {
 //   })
 // })
 
-function addDataToDb(dataFromSensor) {
+function addSensorsToDb(dataFromSensor) {
   var today = moment().toDate()
   today = moment(today).format('YYYY-MM-DD HH:mm:ss')
   let post = {
-    sensor_name: `temp`,
-    arg1: dataFromSensor.temperature,
-    arg2: dataFromSensor.humidity,
+    sensor_name: dataFromSensor.sensor_name,
+    arg1: dataFromSensor.arg1,
+    arg2: dataFromSensor.arg2,
     date: today
   };
   let sql = 'INSERT INTO sensors SET ?'
+  let query = db.query(sql, post, err => {
+    if(err) {
+      throw err
+    }
+  })
+}
+
+function addIRSensors(dataFromSensor) {
+  var today = moment().toDate()
+  today = moment(today).format('YYYY-MM-DD HH:mm:ss')
+  let post = {
+    sensor_name: dataFromSensor.sensor_name,
+    command_name: dataFromSensor.command_name,
+    protocol: dataFromSensor.protocol,
+    address: dataFromSensor.address,
+    command_code: dataFromSensor.command_code
+  };
+  let sql = 'INSERT INTO ir_data SET ?'
   let query = db.query(sql, post, err => {
     if(err) {
       throw err
@@ -205,11 +234,35 @@ app.get("/slider-input/send/:value", (req, res) => {
 
 // Set commandIR
 app.get("/commandIR/send/:value", (req, res) => {
-  const commandIR = req.params.value;
-  port.write(`{"commandIR":${commandIR}}`);
+  const command_name = req.params.value;
+  let sql = `SELECT * from ir_data WHERE command_name = '${command_name}'`
+  let query = db.query(sql, (err, results) => {
+    if(err) {
+      throw err
+    }
+    // for(let element of results) {
+      // element.date = moment(element.date).format('YYYY-MM-DD HH:mm:ss')
+    // }
+    res.send(results);
+  })
+  // port.write(`{"protocol":${commandIR}, "address":${commandIR}, "command_code":${commandIR}}`);
   // port.write(ledState);
-  res.send(`Command ${commandIR} is sent to TV`);
+  // res.send(`Command ${command_name} is sent to TV`);
 });
+
+
+app.post('/commandIR/send', function(req, res) {
+  console.log(req.body);
+  const protocol = req.body.protocol;
+  const command_code = req.body.command_code;
+  const address = req.body.address;
+
+  port.write(`{"protocol": "${protocol}", "address": ${address}, "command_code": ${command_code}}`);
+  // port.write(ledState);
+  return res.send(`Command ${command_code} is sent to TV`);
+});
+
+
 /*
 tables: sensor1 [1], sensor2 [2]
 columns: [1]: temperature, humidity, dateTime; [2]:

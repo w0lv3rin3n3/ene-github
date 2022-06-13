@@ -15,15 +15,14 @@
     <button onClick="setLedState(1)">Turn on</button>
     <button onClick="setLedState(0)">Turn off</button>
     <br /><br />
-    <button onClick="sendIRData(0x20DF10EF)">ON/OFF</button>
-    <button onClick="sendIRData(0x20DF02FD)">UP</button>
-    <button onClick="sendIRData(0x20DF827D)">DOWN</button>
-    <button onClick="sendIRData(0x20DFE01F)">LEFT</button>
-    <button onClick="sendIRData(0x20DF609F)">RIGHT</button>
-    <button onClick="sendIRData(0x20DF40BF)">VOL UP</button>
-    <button onClick="sendIRData(0x20DFC03F)">VOL DOWN</button>
-    <button onClick="sendIRData(0x20DF00FF)">PROGRAM UP</button>
-    <button onClick="sendIRData(0x20DF807F)">PROGRAM DOWN</button>
+    <button onClick="getIRData('light_up')">Light Up</button>
+    <button onClick="getIRData('light_down')">Light Down</button>
+    <button onClick="getIRData('off')">OFF</button>
+    <button onClick="getIRData('on')">ON</button>
+    <button onClick="getIRData('red')">RED</button>
+    <button onClick="getIRData('green')">GREEN</button>
+    <button onClick="getIRData('blue')">BLUE</button>
+    <button onClick="getIRData('white')">WHITE</button>
     <br /><br />
     <div class="charts">
       <div class="chart-container-temp">
@@ -42,14 +41,54 @@
           })
           .catch((err) => console.log(err));
       }
-      function sendIRData(command) {
-        fetch(`http://localhost:3000//commandIR/send/${command}`)
+      function getIRData(command_name) {
+        fetch(`http://localhost:3000/commandIR/send/${command_name}`)
           .then((response) => response.json())
           .then((data) => {
+            const requestObj = {
+              protocol: data[data.length-1].protocol,
+              address: data[data.length-1].address,
+              command_code: data[data.length-1].command_code,
+            };
+            console.log(requestObj);
+            console.log("string:" + JSON.stringify(requestObj));
+            fetch(`http://localhost:3000/commandIR/send`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestObj),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+              })
+              .catch((err) => console.log(err));
             feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
           })
           .catch((err) => console.log(err));
       }
+      // function sendIRData(addr, cmd) {
+      //   const requestObj = {
+      //     protocol: "NEC",
+      //     address: addr,
+      //     command_code: cmd,
+      //   };
+      //   console.log(requestObj);
+      //   console.log("string:" + JSON.stringify(requestObj));
+      //   fetch(`http://localhost:3000/commandIR/send`, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(requestObj),
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+      //     })
+      //     .catch((err) => console.log(err));
+      // }
     </script>
     <script src="src/feedTemp.js"></script>
     <script src="src/feedGas.js"></script>
