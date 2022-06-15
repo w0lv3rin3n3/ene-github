@@ -1,9 +1,18 @@
+h1 {
+  font-size: xx-large;
+}
+
+ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
 #key-features {
   grid-area: main;
-  background: url(images/background.jpg);
-  background-position-x: 35%;
-  /* margin-top: 5rem; */
-  padding: 1rem;
+  background: url(images/background2.jpg);
+  background-position-y: 100%;
+  padding: 0rem;
 }
 
 #key-features .section-title {

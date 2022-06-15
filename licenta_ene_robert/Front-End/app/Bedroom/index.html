@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temp Sensor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- <script src="js/moment-with-locales.js"></script> -->
+    <link rel="stylesheet" href="../shared.css" />
+    <link rel="stylesheet" href="../src/app.css" />
+    <link rel="stylesheet" href="bedroom.css" />
+  </head>
+  <br><br>
+  <header class="main-header">
+    <div>
+      <a href="../index.html" class="main-header__brand">
+        <img src="../images/home_icon.png" alt="Home" />
+      </a>
+    </div>
+    <ul class="main-nav__items">
+      <li class="main-nav__item">
+        <a href="index.html">Bedroom</a>
+      </li>
+      <li class="main-nav__item">
+        <a href="../Livingroom/index.html">Livingroom</a>
+      </li>
+      <li class="main-nav__item">
+        <a href="../Kitchen/index.html">Kitchen</a>
+      </li>
+      <li class="main-nav__item">
+        <a href="../Bathroom/index.html">Bathroom</a>
+      </li>
+    </ul>
+  </header>
+  <body>
+    <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">
+      Top
+    </button>
+    <section id="key-features">
+      <h1 class="section-title">DHT11 Sensor</h1>
+      <ul class="key-feature__list">
+        <li class="key-feature">
+          <div class="key-feature__image" id="temperature">
+            <div id="feedTemp">
+              <script src="../src/feedTemp.js"></script>
+            </div>
+          </div>
+          <p class="key-feature__description">Temperature</p>
+        </li>
+        <li id="myChartTemp-container">
+          <canvas id="myChartTemp"></canvas>
+        </li>
+      </ul>
+      <ul class="key-feature__list">
+        <li class="key-feature">
+          <div class="key-feature__image" id="humidity">
+            <div id="feedHum">
+              <script type="module" src="../src/feedHum.js"></script>
+            </div>
+          </div>
+          <p class="key-feature__description">Humidity</p>
+        </li>
+        <li id="myChartHum-container">
+          <canvas id="myChartHum"></canvas>
+        </li>
+      </ul>
+    </section>
+    <hr>
+    <section id="key-features">
+      <h1 class="section-title">Gas Sensor</h1>
+      <ul class="key-feature__list">
+        <li class="key-feature">
+          <div class="key-feature__image" id="gas">
+            <div id="feedGas">
+              <script src="../src/feedGas.js"></script>
+            </div>
+          </div>
+          <p class="key-feature__description">Gas</p>
+        </li>
+        <li id="myChartGas-container">
+          <canvas id="myChartGas"></canvas>
+        </li>
+      </ul>
+    </section>
+    <h2>Control LED</h2>
+    <div id="ledState">
+      <script type="text/javascript">
+        function setLedState(state) {
+          fetch(`http://localhost:3000/slider-input/send/${state}`)
+            .then((response) => response.json())
+            .then((data) => {
+              feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+            })
+            .catch((err) => console.log(err));
+        }
+      </script>
+      <ul class="LEDBtns">
+        <li>
+          <button onClick="setLedState(1)">Turn on</button>
+        </li>
+        <li>
+          <button onClick="setLedState(0)">Turn off</button>
+        </li>
+      </ul>
+    </div>
+    <br /><br />
+    <h2>Remote control</h2>
+    <ul class="remoteBtns">
+      <li>
+        <button onClick="getIRData('light_up')" id="light_up">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('light_down')" id="light_down">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('off')" id="off">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('on')" id="on">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('red')" id="red">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('green')" id="green">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('blue')" id="blue">UNDEFINED</button>
+      </li>
+      <li>
+        <button onClick="getIRData('white')" id="white">UNDEFINED</button>
+      </li>
+    </ul>
+    <br /><br />
+    <script>
+      function getIRData(command_name) {
+        fetch(`http://localhost:3000/commandIR/send/${command_name}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const requestObj = {
+              protocol: data[data.length - 1].protocol,
+              address: data[data.length - 1].address,
+              command_code: data[data.length - 1].command_code,
+            };
+            console.log(requestObj);
+            console.log("string:" + JSON.stringify(requestObj));
+            fetch(`http://localhost:3000/commandIR/send`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestObj),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+              })
+              .catch((err) => console.log(err));
+            feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+          })
+          .catch((err) => console.log(err));
+      }
+    </script>
+    <script src="scrollTopBtn.js"></script>
+  </body>
+</html>

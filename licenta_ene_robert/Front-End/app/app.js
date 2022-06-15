@@ -18,14 +18,14 @@ const parser = new parsers.Readline({
 });
 
 // Create port
-var port = new SerialPort("COM5", {
-  baudRate: 115200,
-  dataBits: 8,
-  parity: "none",
-  stopBits: 1,
-  flowControl: false,
-});
-port.pipe(parser);
+// var port = new SerialPort("COM5", {
+//   baudRate: 115200,
+//   dataBits: 8,
+//   parity: "none",
+//   stopBits: 1,
+//   flowControl: false,
+// });
+// port.pipe(parser);
 
 
 // Create data buffer
@@ -107,18 +107,18 @@ app.get('/create-sensors-table', (req, res) => {
 })
 
 // Insert sensor
-// app.get('/insert-sensor', (req, res) => {
-// var today = moment().toDate()
-// today = moment(today).format('YYYY-MM-DD HH:mm:ss')
-//   let post = {sensor_name: `temp`, arg1: '25', arg2: ``, date: `${today}`};
-//   let sql = 'INSERT INTO sensors SET ?'
-//   let query = db.query(sql, post, err => {
-//     if(err) {
-//       throw err
-//     }
-//     res.send('Sensor added');
-//   })
-// })
+app.get('/insert-sensor', (req, res) => {
+var today = moment().toDate()
+today = moment(today).format('YYYY-MM-DD HH:mm:ss')
+  let post = {sensor_name: `temp`, arg1: '25', arg2: ``, date: `${today}`};
+  let sql = 'INSERT INTO sensors SET ?'
+  let query = db.query(sql, post, err => {
+    if(err) {
+      throw err
+    }
+    res.send('Sensor added');
+  })
+})
 
 function addSensorsToDb(dataFromSensor) {
   var today = moment().toDate()
@@ -198,7 +198,7 @@ app.get("/", (req, res) => {
 
 // Get temperature data
 app.get("/dht11-sensor", (req, res) => {
-  let sql = `SELECT * from sensors WHERE sensor_name = 'dht11'`
+  let sql = `SELECT * from sensors WHERE sensor_name = 'temp'`
   let query = db.query(sql, (err, results) => {
     if(err) {
       throw err

@@ -1,4 +1,4 @@
-const feedDisplayTemp = document.querySelector("#feedTemp");
+const feedTemp = document.querySelector("#feedTemp");
 fetch("http://localhost:3000/dht11-sensor")
   .then((response) => response.json())
   .then((data) => {
@@ -24,37 +24,30 @@ fetch("http://localhost:3000/dht11-sensor")
             //array of datetime values
             data: valuesArr, 
             backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
+              "rgba(10, 200, 10, 0.2)",
             ],
             borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
+              "rgba(50, 100, 50, 1)",
             ],
-            borderWidth: 1,
+            borderWidth: 2,
           },
         ],
       },
       options: {
         responsive: true,
         scales: {
+          xAxes: [{
+            display: false
+          }],
           y: {
             beginAtZero: true,
           },
         },
       },
     });
-    feedDisplayTemp.insertAdjacentHTML(
+    feedTemp.insertAdjacentHTML(
       "afterbegin",
-      "Temperature: " + data[data.length-1].arg1 + "<br>Humidity: " + data[data.length-1].arg2 + "<br>Date: " + data[data.length-1].date
+      data[data.length-1].arg1 + '&#8451'
     );
   })
   .catch((err) => console.log(err));

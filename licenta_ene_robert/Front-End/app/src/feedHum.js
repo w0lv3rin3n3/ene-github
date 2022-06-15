@@ -1,8 +1,9 @@
-const feedGas = document.querySelector("#feedGas");
-fetch("http://localhost:3000/gas-sensor")
+const feedHum = document.querySelector("#feedHum");
+// import moment from 'moment';
+fetch("http://localhost:3000/dht11-sensor")
   .then((response) => response.json())
   .then((data) => {
-    const ctx = document.getElementById("myChartGas").getContext("2d");
+    const ctx = document.getElementById("myChartHum").getContext("2d");
     const dateTimeArr = [];
     for(let element of data) {
       // moment(element.date).format('HH:mm')
@@ -10,24 +11,25 @@ fetch("http://localhost:3000/gas-sensor")
     }
     const valuesArr = [];
     for(let element of data) {
-      if(element.sensor_name == 'gas')
-        valuesArr.push(element.arg1);
+      if(element.sensor_name == 'temp')
+        valuesArr.push(element.arg2);
     }
-    const myChartGas = new Chart(ctx, {
+    const myChartHum = new Chart(ctx, {
       type: "line",
       data: {
         //array of strings (datetimes)
         labels: dateTimeArr,
+        scaleShowLabels : false,
         datasets: [
           {
-            label: "Gas",
+            label: "Humidity",
             //array of datetime values
             data: valuesArr, 
             backgroundColor: [
-              "rgba(150, 10, 10, 0.2)",
+              "rgba(200, 200, 10, 0.3)",
             ],
             borderColor: [
-              "rgba(200, 50, 50, 1)",
+              "rgba(200, 200, 50, 1)",
             ],
             borderWidth: 2,
           },
@@ -45,9 +47,9 @@ fetch("http://localhost:3000/gas-sensor")
         },
       },
     });
-    feedGas.insertAdjacentHTML(
+    feedHum.insertAdjacentHTML(
       "afterbegin",
-      data[data.length-1].arg1
+      data[data.length-1].arg2 + '&#37'
     );
   })
   .catch((err) => console.log(err));
