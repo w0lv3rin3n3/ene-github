@@ -11,8 +11,8 @@ fetch("http://localhost:3000/dht11-sensor")
     }
     const valuesArr = [];
     for(let element of data) {
-      if(element.sensor_name == 'temp')
-        valuesArr.push(element.arg2);
+      if(element.sensor_name == 'dht11_sensor')
+        valuesArr.push(element.value2);
     }
     const myChartHum = new Chart(ctx, {
       type: "line",
@@ -49,7 +49,7 @@ fetch("http://localhost:3000/dht11-sensor")
     });
     feedHum.insertAdjacentHTML(
       "afterbegin",
-      data[data.length-1].arg2 + '&#37'
+      data[data.length-1].value2 + '&#37'
     );
   })
   .catch((err) => console.log(err));

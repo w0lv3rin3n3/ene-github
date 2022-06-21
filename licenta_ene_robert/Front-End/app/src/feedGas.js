@@ -10,8 +10,8 @@ fetch("http://localhost:3000/gas-sensor")
     }
     const valuesArr = [];
     for(let element of data) {
-      if(element.sensor_name == 'gas')
-        valuesArr.push(element.arg1);
+      if(element.sensor_name == 'gas_sensor')
+        valuesArr.push(element.value1);
     }
     const myChartGas = new Chart(ctx, {
       type: "line",
@@ -47,7 +47,7 @@ fetch("http://localhost:3000/gas-sensor")
     });
     feedGas.insertAdjacentHTML(
       "afterbegin",
-      data[data.length-1].arg1
+      data[data.length-1].value1
     );
   })
   .catch((err) => console.log(err));

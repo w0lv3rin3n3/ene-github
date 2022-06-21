@@ -18,7 +18,7 @@ const parser = new parsers.Readline({
 });
 
 // Create port
-// var port = new SerialPort("COM5", {
+// var port = new SerialPort("COM10", {
 //   baudRate: 115200,
 //   dataBits: 8,
 //   parity: "none",
@@ -57,13 +57,14 @@ parser.on("data", function (data) {
   console.log("Received data from port: " + data);
   app.emit("data", data); //this should send the object to index.html
   dataFromSensor = obj;
+  console.log(Object.keys(dataFromSensor).length);
   if(dataFromSensor.sensor_name == "ir")
   {
     addIRSensors(dataFromSensor)
     console.log("Inserted sensor " + dataFromSensor.sensor_name);
   }
     
-  else
+  else if(Object.keys(dataFromSensor).length > 1)
     addSensorsToDb(dataFromSensor)
 });
 
@@ -125,8 +126,8 @@ function addSensorsToDb(dataFromSensor) {
   today = moment(today).format('YYYY-MM-DD HH:mm:ss')
   let post = {
     sensor_name: dataFromSensor.sensor_name,
-    arg1: dataFromSensor.arg1,
-    arg2: dataFromSensor.arg2,
+    value1: dataFromSensor.value1,
+    value2: dataFromSensor.value2,
     date: today
   };
   let sql = 'INSERT INTO sensors SET ?'
@@ -196,9 +197,9 @@ app.get("/", (req, res) => {
   res.send("Server running on express");
 });
 
-// Get temperature data
+// Get dht11 data
 app.get("/dht11-sensor", (req, res) => {
-  let sql = `SELECT * from sensors WHERE sensor_name = 'temp'`
+  let sql = `SELECT * from sensors WHERE sensor_name = 'dht11_sensor'`
   let query = db.query(sql, (err, results) => {
     if(err) {
       throw err
@@ -210,9 +211,37 @@ app.get("/dht11-sensor", (req, res) => {
   })
 });
 
-// Get 2nd-sensor data
+// Get gas sensor data
 app.get("/gas-sensor", (req, res) => {
   let sql = `SELECT * from sensors WHERE sensor_name = 'gas_sensor'`
+  let query = db.query(sql, (err, results) => {
+    if(err) {
+      throw err
+    }
+    for(let element of results) {
+      element.date = moment(element.date).format('YYYY-MM-DD HH:mm:ss')
+    }
+    res.send(results);
+  })
+});
+
+// Get LDR data
+app.get("/LDR-sensor", (req, res) => {
+  let sql = `SELECT * from sensors WHERE sensor_name = 'LDR_sensor'`
+  let query = db.query(sql, (err, results) => {
+    if(err) {
+      throw err
+    }
+    for(let element of results) {
+      element.date = moment(element.date).format('YYYY-MM-DD HH:mm:ss')
+    }
+    res.send(results);
+  })
+});
+
+// Get PIR data
+app.get("/PIR-sensor", (req, res) => {
+  let sql = `SELECT * from sensors WHERE sensor_name = 'PIR_sensor'`
   let query = db.query(sql, (err, results) => {
     if(err) {
       throw err
@@ -250,6 +279,13 @@ app.get("/commandIR/send/:value", (req, res) => {
   // res.send(`Command ${command_name} is sent to TV`);
 });
 
+// Set stepperState
+app.get("/stepper-input/send/:value", (req, res) => {
+  const stepperState = req.params.value;
+  port.write(`{"stepperState":${stepperState}}`);
+  // port.write(ledState);
+  res.send(`Stepper state changed to ${stepperState}`);
+});
 
 app.post('/commandIR/send', function(req, res) {
   console.log(req.body);
