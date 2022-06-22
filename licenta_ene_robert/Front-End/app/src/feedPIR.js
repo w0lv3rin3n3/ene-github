@@ -1,7 +1,7 @@
 function liveUpdatePIR () {
   const feedPIR = document.querySelector("#feedPIR");
   const textPIRData = document.getElementById('PIRData');
-  setInterval(function() {
+  setInterval(function firstUpdatePIR() {
     fetch("http://localhost:3000/PIR-sensor")
     .then((response) => response.json())
     .then((data) => {
@@ -12,7 +12,8 @@ function liveUpdatePIR () {
       // );
     })
     .catch((err) => console.log(err));
-  }, 3000);
+    return firstUpdatePIR;
+  }(), 15000);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

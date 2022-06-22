@@ -41,6 +41,7 @@
         <li class="key-feature">
           <div class="key-feature__image" id="temperature">
             <div id="feedTemp">
+              <p id="TempData"></p>
               <script src="../src/feedTemp.js"></script>
             </div>
           </div>
@@ -54,6 +55,7 @@
         <li class="key-feature">
           <div class="key-feature__image" id="humidity">
             <div id="feedHum">
+              <p id="HumData"></p>
               <script type="module" src="../src/feedHum.js"></script>
             </div>
           </div>
@@ -71,12 +73,12 @@
         <li class="key-feature">
           <div class="key-feature__image" id="gas">
             <div id="feedGas">
-              <script src="../src/feedGas.js"></script> <span>ppm</span>
+              <p id="GasData"></p>
+              <script src="../src/feedGas.js"></script>
             </div>
           </div>
           <!-- <p class="key-feature__description">Gas</p> -->
-          <p style="color: rgb(226, 0, 0); text-align: center; font-size: x-large;">The amount of gas
-            may cause <br> serious damage to health</p>
+          <p class="key-feature__description" id="gasWarning">Gas</p>
         </li>
         <li id="myChartGas-container">
           <canvas id="myChartGas"></canvas>
@@ -90,6 +92,7 @@
         <li class="key-feature">
           <div class="key-feature__image" id="LDR">
             <div id="feedLDR">
+              <p id="LDRData"></p>
               <script src="../src/feedLDR.js"></script>
             </div>
           </div>
