@@ -45,9 +45,14 @@ function liveUpdateTemp() {
                     display: false,
                   },
                 ],
-                y: {
-                  beginAtZero: true,
+                yAxes: [{
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 70,
+                    beginAtZero: true,
+                  }
                 },
+              ]
               },
             },
           });

@@ -1,0 +1,34 @@
+function getInputValue() {
+  var inputVal1 = document.getElementById("btn1Config").value;
+  const btn1 = document.getElementById("btn1");
+  if(inputVal1 != "")
+    btn1.innerText = inputVal1;
+  var inputVal2 = document.getElementById("btn2Config").value;
+  const btn2 = document.getElementById("btn2");
+  if(inputVal2 != "")
+    btn2.innerText = inputVal2;
+  var inputVal3 = document.getElementById("btn3Config").value;
+  const btn3 = document.getElementById("btn3");
+  if(inputVal3 != "")
+    btn3.innerText = inputVal3;
+  var inputVal4 = document.getElementById("btn4Config").value;
+  const btn4 = document.getElementById("btn4");
+  if(inputVal4 != "")
+    btn4.innerText = inputVal4;
+  var inputVal5 = document.getElementById("btn5Config").value;
+  const btn5 = document.getElementById("btn5");
+  if(inputVal5 != "")
+    btn5.innerText = inputVal5;
+  var inputVal6 = document.getElementById("btn6Config").value;
+  const btn6 = document.getElementById("btn6");
+  if(inputVal6 != "")
+    btn6.innerText = inputVal6;
+  var inputVal7 = document.getElementById("btn7Config").value;
+  const btn7 = document.getElementById("btn7");
+  if(inputVal7 != "")
+    btn7.innerText = inputVal7;
+  var inputVal8 = document.getElementById("btn8Config").value;
+  const btn8 = document.getElementById("btn8");
+  if(inputVal8 != "")
+    btn8.innerText = inputVal8;
+}

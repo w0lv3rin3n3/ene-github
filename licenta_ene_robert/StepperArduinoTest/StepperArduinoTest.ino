@@ -28,12 +28,14 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   Serial.println(jsondata1);
   if(jsondata1 == "\"stepperState\":1")
   {
+    Serial2.println("1");
     StepsRequired  =  STEPS_PER_OUT_REV * 2;   
     steppermotor.setSpeed(1000);  
     steppermotor.step(StepsRequired);    
   }
   else if(jsondata1 == "\"stepperState\":0")
   {
+    Serial2.println("0");
     StepsRequired  = - STEPS_PER_OUT_REV * 2;   
     steppermotor.setSpeed(1000);  
     steppermotor.step(StepsRequired);    
@@ -54,8 +56,5 @@ void setup() {
 }
  
 void loop() {
-    StepsRequired  =  STEPS_PER_OUT_REV * 2;   
-    steppermotor.setSpeed(1000);  
-    steppermotor.step(StepsRequired);  
-    delay(10000);  
+
 }

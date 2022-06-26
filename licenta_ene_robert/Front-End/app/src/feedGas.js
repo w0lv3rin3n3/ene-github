@@ -46,9 +46,15 @@ function liveUpdateGas() {
                     display: false,
                   },
                 ],
-                y: {
-                  beginAtZero: true,
+                yAxes: [{
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 70,
+                    beginAtZero: true,
+                  }
+                  
                 },
+              ]
               },
             },
           });
@@ -62,8 +68,10 @@ function liveUpdateGas() {
           }
           else
           {
+            textGasData.style.color = "black";
             textGasData.textContent = data[data.length - 1].value1 + 'ppm';
             textGasWarning.textContent = "Gas";
+            textGasWarning.style.color = "rgb(110, 110, 110)";
           }
         })
         .catch((err) => console.log(err));

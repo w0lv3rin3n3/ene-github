@@ -149,6 +149,52 @@ h2 {
 
 /* -----------------------remoteControlBtns-------------------- */
 
+.remote {
+  columns: 3;
+  list-style: none;
+  margin: auto;
+  padding-right: 40px;
+  border-radius: 10px;
+  background-color: #bbbbbb;
+}
+
+.configRemoteBtns {
+  columns: 1;
+  list-style: none;
+  margin: auto;
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: #bbbbbb;
+}
+
+.configRemoteBtns input {
+  font-size: 1rem;
+  text-align: center;
+  height: 3rem;
+  border-radius: 4px;
+}
+
+.configRemoteBtns button {
+  background-color: #ddd;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  width: auto;
+  border: none;
+  color: black;
+  padding: 16px 10px;
+  text-align: center;
+  margin: 9px 2px;
+  transition: 0.3s;
+}
+
+.configRemoteBtns button:hover {
+  background-color: #3e8e41;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  cursor: pointer;
+}
+
 .remoteBtns {
   columns: 2;
   list-style: none;

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../src/app.css" />
     <link rel="stylesheet" href="bedroom.css" />
   </head>
-  <br><br>
+  <br /><br />
   <header class="main-header">
     <div>
       <a href="../index.html" class="main-header__brand">
@@ -66,7 +66,7 @@
         </li>
       </ul>
     </section>
-    <hr>
+    <hr />
     <section id="key-features">
       <h1 class="section-title">Gas Sensor</h1>
       <ul class="key-feature__list">
@@ -85,7 +85,7 @@
         </li>
       </ul>
     </section>
-    <hr>
+    <hr />
     <section id="key-features">
       <h1 class="section-title">Light Sensors</h1>
       <ul class="key-feature__list">
@@ -132,40 +132,162 @@
     </div>
     <br /><br />
     <h2>Remote control</h2>
-    <ul class="remoteBtns">
+    <ul class="remote">
       <li>
-        <button onClick="getIRData('light_up')" id="light_up">UP</button>
-        <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a>
+        <ul class="configRemoteBtns">
+          <li>
+            <input
+              type="text"
+              placeholder="Button 1 config..."
+              id="btn1Config"
+            />
+            <button type="button" onclick="getInputValue();">
+              Btn1 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn1 Cmd
+            </button>
+          </li>
+          <li>
+            <input
+              type="text"
+              placeholder="Button 2 config..."
+              id="btn2Config"
+            />
+            <button type="button" onclick="getInputValue();">
+              Btn2 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn2 Cmd
+            </button>
+          </li>
+          <li>
+            <input
+              type="text"
+              placeholder="Button 3 config..."
+              id="btn3Config"
+            />
+            <button type="button" onclick="getInputValue();">
+              Btn3 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn3 Cmd
+            </button>
+          </li>
+          <li>
+            <input
+              type="text"
+              placeholder="Button 4 config..."
+              id="btn4Config"
+            />
+            <button type="button" onclick="getInputValue();">
+              Btn4 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn4 Cmd
+            </button>
+          </li>
+        </ul>
       </li>
       <li>
-        <button onClick="getIRData('light_down')" id="light_down">DOWN</button>
-        <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a>
+        <ul class="remoteBtns">
+          <li>
+            <button onClick="getIRData()" id="btn1">UNDEFINED</button>
+            <!-- <a
+              onClick="getIRData()"
+              href="../ConfigureForm/index.html"
+              class="editBtnLeft"
+              >edit</a
+            > -->
+          </li>
+          <li>
+            <button onClick="sendIRData('on')" id="btn2">UNDEFINED</button>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a> -->
+          </li>
+          <li>
+            <button onClick="sendIRData('btn3')" id="btn3">UNDEFINED</button>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a> -->
+          </li>
+          <li>
+            <button onClick="sendIRData('btn4')" id="btn4">UNDEFINED</button>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a> -->
+          </li>
+          <li>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
+            <button onClick="sendIRData('btn5')" id="btn5">UNDEFINED</button>
+          </li>
+          <li>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
+            <button onClick="sendIRData('btn6')" id="btn6">UNDEFINED</button>
+          </li>
+          <li>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
+            <button onClick="sendIRData('btn7')" id="btn7">UNDEFINED</button>
+          </li>
+          <li>
+            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
+            <button onClick="sendIRData('btn8')" id="btn8">UNDEFINED</button>
+          </li>
+        </ul>
       </li>
       <li>
-        <button onClick="getIRData('off')" id="off">OFF</button>
-        <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a>
-      </li>
-      <li>
-        <button onClick="getIRData('on')" id="on">ON</button>
-        <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a>
-      </li>
-      <li>
-        <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a>
-        <button onClick="getIRData('red')" id="red">RED</button>
-      </li>
-      <li>
-        <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a>
-        <button onClick="getIRData('green')" id="green">GREEN</button>
-      </li>
-      <li>
-        <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a>
-        <button onClick="getIRData('blue')" id="blue">BLUE</button>
-      </li>
-      <li>
-        <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a>
-        <button onClick="getIRData('white')" id="white">WHITE</button>
+        <ul class="configRemoteBtns">
+          <li>
+            <button type="button" onclick="getInputValue();">
+              Btn5 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn5 Cmd
+            </button>
+            <input
+              type="text"
+              placeholder="Button 5 config..."
+              id="btn5Config"
+            />
+          </li>
+          <li>
+            <button type="button" onclick="getInputValue();">
+              Btn6 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn6 Cmd
+            </button>
+            <input
+              type="text"
+              placeholder="Button 6 config..."
+              id="btn6Config"
+            />
+          </li>
+          <li>
+            <button type="button" onclick="getInputValue();">
+              Btn7 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn7 Cmd
+            </button>
+            <input
+              type="text"
+              placeholder="Button 7 config..."
+              id="btn7Config"
+            />
+          </li>
+          <li>
+            <button type="button" onclick="getInputValue();">
+              Btn8 Name
+            </button>
+            <button type="button" onclick="getIRData();">
+              Btn8 Cmd
+            </button>
+            <input
+              type="text"
+              placeholder="Button 8 config..."
+              id="btn8Config"
+            />
+          </li>
+        </ul>
       </li>
     </ul>
+
     <br /><br />
     <h2>Stepper Control</h2>
     <div id="stepperState">
@@ -190,7 +312,7 @@
     </div>
     <br /><br />
     <script>
-      function getIRData(command_name) {
+      function sendIRData(command_name) {
         fetch(`http://localhost:3000/commandIR/send/${command_name}`)
           .then((response) => response.json())
           .then((data) => {
@@ -217,7 +339,18 @@
           })
           .catch((err) => console.log(err));
       }
+
+      function getIRData() {
+        fetch(`http://localhost:3000/commandIR/get`)
+          .then((response) => response.json())
+          .then((data) => {
+            // feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+          })
+          .catch((err) => console.log(err));
+        // feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+      }
     </script>
     <script src="scrollTopBtn.js"></script>
+    <script src="changeBtn.js"></script>
   </body>
 </html>

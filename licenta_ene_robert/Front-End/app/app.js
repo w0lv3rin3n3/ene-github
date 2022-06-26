@@ -18,53 +18,34 @@ const parser = new parsers.Readline({
 });
 
 // Create port
-// var port = new SerialPort("COM10", {
-//   baudRate: 115200,
-//   dataBits: 8,
-//   parity: "none",
-//   stopBits: 1,
-//   flowControl: false,
-// });
-// port.pipe(parser);
+var port = new SerialPort("COM10", {
+  baudRate: 115200,
+  dataBits: 8,
+  parity: "none",
+  stopBits: 1,
+  flowControl: false,
+});
+port.pipe(parser);
 
 
 // Create data buffer
 var dataFromSensor = {};
-// var dataFromSensor = new Map();
-
-
-/*sensorData = [] array of objects
-sensorData.push(data) inside parser function
-example: sensorData[0].temperature (results in number)
-*/
 
 // Parse JSON incoming data
 parser.on("data", function (data) {
-  // let sensor_params = data.split("@");
-  // const sensor_id = sensor_params[0];
-  // console.log('debug',sensor_params);
   const obj = JSON.parse(data);
-  // if (sensor_id == "0") {
-    // console.log(obj.temperature);
-
-  //   console.log(obj.humidity);
-  // } else if (sensor_id == "1") {
-  //   console.log(obj.primul);
-
-  //   console.log(obj.al_doilea);
-  // }
 
   console.log("Received data from port: " + data);
   app.emit("data", data); //this should send the object to index.html
   dataFromSensor = obj;
-  console.log(Object.keys(dataFromSensor).length);
+  // console.log(Object.keys(dataFromSensor).length);
   if(dataFromSensor.sensor_name == "ir")
   {
     addIRSensors(dataFromSensor)
     console.log("Inserted sensor " + dataFromSensor.sensor_name);
   }
     
-  else if(Object.keys(dataFromSensor).length > 1)
+  else if(Object.keys(dataFromSensor).length > 1 && dataFromSensor.sensor_name != "ir")
     addSensorsToDb(dataFromSensor)
 });
 
@@ -143,7 +124,7 @@ function addIRSensors(dataFromSensor) {
   today = moment(today).format('YYYY-MM-DD HH:mm:ss')
   let post = {
     sensor_name: dataFromSensor.sensor_name,
-    command_name: dataFromSensor.command_name,
+    command_name: document.getElementById("btn1"),
     protocol: dataFromSensor.protocol,
     address: dataFromSensor.address,
     command_code: dataFromSensor.command_code
@@ -262,22 +243,23 @@ app.get("/slider-input/send/:value", (req, res) => {
 });
 
 // Set commandIR
-app.get("/commandIR/send/:value", (req, res) => {
-  const command_name = req.params.value;
-  let sql = `SELECT * from ir_data WHERE command_name = '${command_name}'`
-  let query = db.query(sql, (err, results) => {
-    if(err) {
-      throw err
-    }
-    // for(let element of results) {
-      // element.date = moment(element.date).format('YYYY-MM-DD HH:mm:ss')
-    // }
-    res.send(results);
-  })
-  // port.write(`{"protocol":${commandIR}, "address":${commandIR}, "command_code":${commandIR}}`);
-  // port.write(ledState);
-  // res.send(`Command ${command_name} is sent to TV`);
-});
+// app.get("/commandIR/send/:value", (req, res) => {
+//   const command_name = req.params.value;
+//   let sql = `SELECT * from ir_data WHERE command_name = '${command_name}'`
+//   let query = db.query(sql, (err, results) => {
+//     if(err) {
+//       throw err
+//     }
+//     // for(let element of results) {
+//       // element.date = moment(element.date).format('YYYY-MM-DD HH:mm:ss')
+//     // }
+//     res.send(results);
+//   })
+//   // port.write(`{"protocol":${commandIR}, "address":${commandIR}, "command_code":${commandIR}}`);
+//   // port.write(ledState);
+//   // res.send(`Command ${command_name} is sent to TV`);
+// });
+
 
 // Set stepperState
 app.get("/stepper-input/send/:value", (req, res) => {
@@ -287,6 +269,7 @@ app.get("/stepper-input/send/:value", (req, res) => {
   res.send(`Stepper state changed to ${stepperState}`);
 });
 
+// Send commandIR
 app.post('/commandIR/send', function(req, res) {
   console.log(req.body);
   const protocol = req.body.protocol;
@@ -298,13 +281,10 @@ app.post('/commandIR/send', function(req, res) {
   return res.send(`Command ${command_code} is sent to TV`);
 });
 
-
-/*
-tables: sensor1 [1], sensor2 [2]
-columns: [1]: temperature, humidity, dateTime; [2]:
-obj = {comanada1 : 'dwdwdadw', comanda 2} 
-ruta/:comanda {fa ceva pe obj.comanda}
-apelare: ruta/comanda1
-*/
+// Receive commandIR
+app.get('/commandIR/get', function(req, res) {
+  port.write(`{"receive": "commandIR"}`);
+  return res.send(`Command requested`);
+});
 
 app.listen(3000, () => console.log("Example app listening on port 3000!"));
