@@ -13,7 +13,7 @@ function liveUpdatePIR () {
     })
     .catch((err) => console.log(err));
     return firstUpdatePIR;
-  }(), 15000);
+  }(), 1000);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

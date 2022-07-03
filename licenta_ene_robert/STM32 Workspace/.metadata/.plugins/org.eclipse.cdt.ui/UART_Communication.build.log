@@ -1,0 +1,17 @@
+15:58:47 **** Incremental Build of configuration Debug for project UART_Communication ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "UART_Communication.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\enero\AppData\Roaming\SPB_16.6\ene-github\licenta_ene_robert\STM32 Workspace\UART_Communication\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="UART_Communication.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: UART_Communication.elf
+ 
+arm-none-eabi-size   UART_Communication.elf 
+arm-none-eabi-objdump -h -S  UART_Communication.elf  > "UART_Communication.list"
+   text	   data	    bss	    dec	    hex	filename
+  12156	    120	   1832	  14108	   371c	UART_Communication.elf
+Finished building: default.size.stdout
+ 
+Finished building: UART_Communication.list
+ 
+
+15:58:49 Build Finished. 0 errors, 0 warnings. (took 1s.393ms)
+

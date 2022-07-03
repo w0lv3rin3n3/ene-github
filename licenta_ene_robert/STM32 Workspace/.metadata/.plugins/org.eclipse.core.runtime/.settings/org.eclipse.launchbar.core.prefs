@@ -1,7 +1,12 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:blinky Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tmp102 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:TUT_ESP8266_WEBSERVER Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:blinky Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:tmp102 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:UART_Communication Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:testing_uart Debug
 eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:TUT_ESP8266_WEBSERVER\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:TUT_ESP8266_WEBSERVER\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:UART_Communication\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:UART_Communication\ Debug/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:blinky\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:blinky\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:testing_uart\ Debug/activeLaunchMode=run

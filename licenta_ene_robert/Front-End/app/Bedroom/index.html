@@ -123,15 +123,26 @@
       </script>
       <ul class="LEDBtns">
         <li>
-          <button onClick="setLedState(1)">Turn on</button>
+          <button onClick="setLedState(0)">Turn on</button>
         </li>
         <li>
-          <button onClick="setLedState(0)">Turn off</button>
+          <button onClick="setLedState(1)">Turn off</button>
         </li>
       </ul>
     </div>
     <br /><br />
+    <div id="feedBtns">
+      <script src="../src/feedBtns.js"></script>
+    </div>
     <h2>Remote control</h2>
+    <p id="remoteControlInstructions">
+      <span>Hint:</span> <br>
+      1. Write your command name (max 6 characters) in text field "Button x config...".<br>
+      2. Press "Btnx Name" to add your name to "UNDEFINED" button.  <br>
+      3. Press "Btnx Cmd" <br>
+      4. After ~1 second register IR command to sensor. <br>
+      5. Now you can press configured button.
+    </p>
     <ul class="remote">
       <li>
         <ul class="configRemoteBtns">
@@ -141,12 +152,8 @@
               placeholder="Button 1 config..."
               id="btn1Config"
             />
-            <button type="button" onclick="getInputValue();">
-              Btn1 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn1 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn1 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn1").innerText);'>Btn1 Cmd</button>
           </li>
           <li>
             <input
@@ -154,12 +161,8 @@
               placeholder="Button 2 config..."
               id="btn2Config"
             />
-            <button type="button" onclick="getInputValue();">
-              Btn2 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn2 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn2 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn2").innerText);'>Btn2 Cmd</button>
           </li>
           <li>
             <input
@@ -167,12 +170,8 @@
               placeholder="Button 3 config..."
               id="btn3Config"
             />
-            <button type="button" onclick="getInputValue();">
-              Btn3 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn3 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn3 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn3").innerText);'>Btn3 Cmd</button>
           </li>
           <li>
             <input
@@ -180,65 +179,44 @@
               placeholder="Button 4 config..."
               id="btn4Config"
             />
-            <button type="button" onclick="getInputValue();">
-              Btn4 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn4 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn4 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn4").innerText);'>Btn4 Cmd</button>
           </li>
         </ul>
       </li>
       <li>
         <ul class="remoteBtns">
           <li>
-            <button onClick="getIRData()" id="btn1">UNDEFINED</button>
-            <!-- <a
-              onClick="getIRData()"
-              href="../ConfigureForm/index.html"
-              class="editBtnLeft"
-              >edit</a
-            > -->
+            <button onClick="sendIRData(document.getElementById('btn1').innerText)" id="btn1">UNDEFINED</button>
           </li>
           <li>
-            <button onClick="sendIRData('on')" id="btn2">UNDEFINED</button>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a> -->
+            <button onClick="sendIRData(document.getElementById('btn2').innerText)" id="btn2">UNDEFINED</button>
           </li>
           <li>
-            <button onClick="sendIRData('btn3')" id="btn3">UNDEFINED</button>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a> -->
+            <button onClick="sendIRData(document.getElementById('btn3').innerText)" id="btn3">UNDEFINED</button>
           </li>
           <li>
-            <button onClick="sendIRData('btn4')" id="btn4">UNDEFINED</button>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnLeft">edit</a> -->
+            <button onClick="sendIRData(document.getElementById('btn4').innerText)" id="btn4">UNDEFINED</button>
           </li>
           <li>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
-            <button onClick="sendIRData('btn5')" id="btn5">UNDEFINED</button>
+            <button onClick="sendIRData(document.getElementById('btn5').innerText)" id="btn5">UNDEFINED</button>
           </li>
           <li>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
-            <button onClick="sendIRData('btn6')" id="btn6">UNDEFINED</button>
+            <button onClick="sendIRData(document.getElementById('btn6').innerText)" id="btn6">UNDEFINED</button>
           </li>
           <li>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
-            <button onClick="sendIRData('btn7')" id="btn7">UNDEFINED</button>
+            <button onClick="sendIRData(document.getElementById('btn7').innerText)" id="btn7">UNDEFINED</button>
           </li>
           <li>
-            <!-- <a href="../ConfigureForm/index.html" class="editBtnRight">edit</a> -->
-            <button onClick="sendIRData('btn8')" id="btn8">UNDEFINED</button>
+            <button onClick="sendIRData(document.getElementById('btn8').innerText)" id="btn8">UNDEFINED</button>
           </li>
         </ul>
       </li>
       <li>
         <ul class="configRemoteBtns">
           <li>
-            <button type="button" onclick="getInputValue();">
-              Btn5 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn5 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn5 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn5").innerText);'>Btn5 Cmd</button>
             <input
               type="text"
               placeholder="Button 5 config..."
@@ -246,12 +224,8 @@
             />
           </li>
           <li>
-            <button type="button" onclick="getInputValue();">
-              Btn6 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn6 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn6 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn6").innerText);'>Btn6 Cmd</button>
             <input
               type="text"
               placeholder="Button 6 config..."
@@ -259,12 +233,8 @@
             />
           </li>
           <li>
-            <button type="button" onclick="getInputValue();">
-              Btn7 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn7 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn7 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn7").innerText);'>Btn7 Cmd</button>
             <input
               type="text"
               placeholder="Button 7 config..."
@@ -272,12 +242,8 @@
             />
           </li>
           <li>
-            <button type="button" onclick="getInputValue();">
-              Btn8 Name
-            </button>
-            <button type="button" onclick="getIRData();">
-              Btn8 Cmd
-            </button>
+            <button type="button" onclick="getInputValue();addBtnData();">Btn8 Name</button>
+            <button type="button" onclick='getIRData(document.getElementById("btn8").innerText);'>Btn8 Cmd</button>
             <input
               type="text"
               placeholder="Button 8 config..."
@@ -303,10 +269,10 @@
       </script>
       <ul class="stepperBtns">
         <li>
-          <button onClick="setStepperState(1)">Open curtain</button>
+          <button onClick="setStepperState(0)">Open door</button>
         </li>
         <li>
-          <button onClick="setStepperState(0)">Close curtain</button>
+          <button onClick="setStepperState(1)">Close door</button>
         </li>
       </ul>
     </div>
@@ -339,15 +305,54 @@
           })
           .catch((err) => console.log(err));
       }
-
-      function getIRData() {
-        fetch(`http://localhost:3000/commandIR/get`)
+      function addBtnData() {
+        const btn1value = document.getElementById("btn1").innerText;
+        const btn2value = document.getElementById("btn2").innerText;
+        const btn3value = document.getElementById("btn3").innerText;
+        const btn4value = document.getElementById("btn4").innerText;
+        const btn5value = document.getElementById("btn5").innerText;
+        const btn6value = document.getElementById("btn6").innerText;
+        const btn7value = document.getElementById("btn7").innerText;
+        const btn8value = document.getElementById("btn8").innerText;
+        const requestObj = {
+              btn1: btn1value,
+              btn2: btn2value,
+              btn3: btn3value,
+              btn4: btn4value,
+              btn5: btn5value,
+              btn6: btn6value,
+              btn7: btn7value,
+              btn8: btn8value,
+            };
+        fetch(`http://localhost:3000/insert-buttons`, {
+          method: 'POST',
+          headers: {
+            'Content-Type':'application/json',
+          },
+          body: JSON.stringify(requestObj),
+        })
           .then((response) => response.json())
-          .then((data) => {
-            // feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+          .then((requestObj) => {
+            console.log('Success:', requestObj);
           })
           .catch((err) => console.log(err));
-        // feedDisplay.insertAdjacentHTML("afterbegin", "Data sent");
+      }
+      function getIRData(btn_value) {
+        const requestObj = {
+              command_name: btn_value,
+            };
+        fetch(`http://localhost:3000/commandIR/get`, {
+          method: 'POST',
+          headers: {
+            'Content-Type':'application/json',
+          },
+          body: JSON.stringify(requestObj),
+        })
+          .then((response) => response.json())
+          .then((requestObj) => {
+            console.log('Success:', requestObj);
+          })
+          .catch((err) => console.log(err));
       }
     </script>
     <script src="scrollTopBtn.js"></script>

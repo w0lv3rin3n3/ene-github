@@ -16,7 +16,7 @@ function liveUpdateLDR() {
       })
       .catch((err) => console.log(err));
       return firstUpdateLDR;
-    }(), 15000);
+    }(), 1000);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
